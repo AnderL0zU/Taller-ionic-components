@@ -3,10 +3,6 @@
 **Unidad 3:** Desarrollo Móvil Multiplataforma (Ionic + Angular)  
 
 ---
-
-## 🎯 Descripción del Proyecto
-Este proyecto didáctico contiene la implementación completa para la sesión práctica de **4 Horas Presenciales** y la resolución de referencia para el **Reto de Trabajo Independiente (3.5 Horas)**.
-
 ### Estructura del Código:
 - **`src/app/home/`**: Pantalla inicial demostrativa con tipado estático en TypeScript, enlace de datos por interpolación (`{{ }}`) y enlace de eventos (`(click)`).
 - **`src/app/tabs/`**: Implementación de navegación por pestañas (*Tabs*) con:
@@ -16,7 +12,7 @@ Este proyecto didáctico contiene la implementación completa para la sesión pr
 
 ---
 
-## 🚀 Requisitos e Instalación
+## Requisitos e Instalación
 
 ### 1. Verificar Entorno
 Asegúrate de contar con Node.js y el Ionic CLI instalados:
@@ -46,14 +42,14 @@ La aplicación se abrirá automáticamente en tu navegador en `http://localhost:
 
 ---
 
-## 🛠️ Herramientas de Inspección Móvil
+##  Herramientas de Inspección Móvil
 1. Presiona `F12` o `Ctrl + Shift + I` en Google Chrome o Microsoft Edge.
 2. Haz clic en el icono **Toggle Device Toolbar** (`Ctrl + Shift + M`).
 3. Selecciona un dispositivo de prueba (por ejemplo *iPhone 14 Pro* o *Pixel 7*) para simular la visualización móvil exacta.
 
 ---
 
-## 👨‍💻 Estructura de Archivos Pedagógica
+##  Estructura de Archivos Pedagógica
 ```text
 src/app/
 ├── app.routes.ts         -> Gestor central de rutas de la aplicación
