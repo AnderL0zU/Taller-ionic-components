@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesión 3.1: Introducción a Ionic y Desarrollo Híbrido | Programación de Dispositivos Móviles</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ionic: {
+              DEFAULT: '#3880ff',
+              shade: '#3171e0',
+              tint: '#4c8dff',
+              light: '#f4f5f8',
+              dark: '#1e293b'
+            },
+            angular: '#dd0031'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom styles for device mock and syntax */
+    .mobile-frame {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 12px #1e293b, 0 0 0 14px #475569;
+      border-radius: 40px;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .code-block {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: 'Fira Code', monospace;
+    }
+    .badge-glow {
+      box-shadow: 0 0 15px rgba(56, 128, 255, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 text-white text-xs sm:text-sm font-medium py-2 px-4 text-center">
+    <span>📱 Asignatura: <strong>Programación de Dispositivos Móviles</strong> • Unidad 3: Desarrollo Multiplataforma (Ionic + Angular)</span>
+  </div>
+
+  <!-- Sticky Header Navigation -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-md">
+          <span>⚡</span>
+        </div>
+        <div>
+          <h1 class="font-bold text-slate-900 text-base leading-tight">Sesión 3.1: Introducción a Ionic</h1>
+          <p class="text-xs text-slate-500">Guía de Aula y Laboratorio Práctico</p>
+        </div>
+      </div>
+
+      <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-600">
+        <a href="#objetivos" class="hover:text-blue-600 transition-colors">Objetivos</a>
+        <a href="#paradigmas" class="hover:text-blue-600 transition-colors">Nativo vs Híbrido</a>
+        <a href="#entorno" class="hover:text-blue-600 transition-colors">Entorno</a>
+        <a href="#anatomia" class="hover:text-blue-600 transition-colors">Anatomía</a>
+        <a href="#simulador" class="hover:text-blue-600 transition-colors flex items-center gap-1 text-blue-600 font-semibold">
+          <i data-lucide="smartphone" class="w-4 h-4"></i> Simulador
+        </a>
+        <a href="#agenda" class="hover:text-blue-600 transition-colors">Agenda (4h)</a>
+        <a href="#reto" class="hover:text-blue-600 transition-colors">Reto Tabs</a>
+        <a href="#checklist" class="hover:text-blue-600 transition-colors">Checklist</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Presencial 4h + 5h Auton.
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-slate-50 py-12 lg:py-16 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/80 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-4">
+            <i data-lucide="layers" class="w-3.5 h-3.5"></i> Unidad 3 • Sesión 3.1
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Desarrollo Móvil Multiplataforma con <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Ionic + Angular</span>
+          </h2>
+          <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+            Aprende a transformar el poder de los estándares web modernos (HTML5, SCSS, TypeScript) en experiencias móviles nativas fluidas para Android e iOS mediante el ecosistema de <strong>Ionic Framework</strong> y <strong>Capacitor</strong>.
+          </p>
+
+          <div class="mt-6 flex flex-wrap gap-4 items-center">
+            <a href="#simulador" class="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2">
+              <i data-lucide="play" class="w-4 h-4"></i> Probar Simulador en Vivo
+            </a>
+            <a href="#agenda" class="px-5 py-3 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-700 font-semibold text-sm shadow-sm transition-all flex items-center gap-2">
+              <i data-lucide="calendar" class="w-4 h-4"></i> Ver Agenda de Clase (240 min)
+            </a>
+          </div>
+
+          <!-- Quick Metrics Grid -->
+          <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-200">
+            <div>
+              <p class="text-xs text-slate-500 uppercase font-medium">Duración Presencial</p>
+              <p class="text-xl font-bold text-slate-800">4 Horas</p>
+              <span class="text-xs text-blue-600">240 minutos</span>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 uppercase font-medium">Trabajo Autónomo</p>
+              <p class="text-xl font-bold text-slate-800">5 Horas</p>
+              <span class="text-xs text-indigo-600">Reto de Tabs & Perfil</span>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 uppercase font-medium">Stack Técnico</p>
+              <p class="text-xl font-bold text-slate-800">Ionic 8 + Ng 18</p>
+              <span class="text-xs text-purple-600">Standalone + TS</span>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 uppercase font-medium">Herramienta</p>
+              <p class="text-xl font-bold text-slate-800">Ionic CLI</p>
+              <span class="text-xs text-emerald-600">ionic serve (Hot Reload)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Concept Preview Widget -->
+        <div class="lg:col-span-5">
+          <div class="bg-slate-900 rounded-2xl p-6 text-white shadow-2xl border border-slate-800">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+              <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+              </div>
+              <span class="text-xs font-mono text-slate-400">Terminal Verificación</span>
+            </div>
+            <div class="py-4 font-mono text-sm space-y-3">
+              <div>
+                <p class="text-slate-400 text-xs"># 1. Comprobar Node.js</p>
+                <p class="text-emerald-400">$ node -v <span class="text-slate-300">-> v20.11.0</span></p>
+              </div>
+              <div>
+                <p class="text-slate-400 text-xs"># 2. Comprobar Ionic CLI</p>
+                <p class="text-emerald-400">$ ionic -v <span class="text-slate-300">-> 7.2.0</span></p>
+              </div>
+              <div>
+                <p class="text-slate-400 text-xs"># 3. Iniciar Servidor de Desarrollo</p>
+                <p class="text-blue-400">$ ionic serve</p>
+                <p class="text-slate-400 text-xs mt-1">[INFO] Development server running!</p>
+                <p class="text-slate-300 text-xs">> Local: <span class="text-blue-300 underline">http://localhost:8100/</span></p>
+              </div>
+            </div>
+            <div class="bg-slate-800/60 rounded-xl p-3 text-xs text-slate-300 flex items-center justify-between">
+              <span>⚡ Hot Reload activo: Los cambios en .ts/.html se reflejan de inmediato.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Objetivos de la Sesión -->
+  <section id="objetivos" class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900">🎯 Objetivos de Aprendizaje</h3>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">
+          Competencias técnicas y prácticas que cada estudiante dominará al finalizar la sesión.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Goal 1 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg mb-4">
+            01
+          </div>
+          <h4 class="text-lg font-bold text-slate-900">Comprender el Paradigma Híbrido</h4>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Entender la arquitectura del <strong>WebView</strong> y la capa de abstracción de hardware (Capacitor/Cordova) frente al desarrollo nativo tradicional en Android Studio.
+          </p>
+        </div>
+
+        <!-- Goal 2 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg mb-4">
+            02
+          </div>
+          <h4 class="text-lg font-bold text-slate-900">Verificar y Configurar el Entorno</h4>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Validar la instalación en laboratorio de Node.js, npm, Ionic CLI y configurar Visual Studio Code con las extensiones oficiales de Angular e Ionic.
+          </p>
+        </div>
+
+        <!-- Goal 3 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-purple-400 hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg mb-4">
+            03
+          </div>
+          <h4 class="text-lg font-bold text-slate-900">Crear y Servir la Primera App</h4>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Generar un proyecto con el comando <code>ionic start</code> usando las plantillas <code>blank</code> y <code>tabs</code>, y ejecutar el servidor local con <code>ionic serve</code>.
+          </p>
+        </div>
+
+        <!-- Goal 4 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-400 hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg mb-4">
+            04
+          </div>
+          <h4 class="text-lg font-bold text-slate-900">Identificar la Anatomía del Proyecto</h4>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Analizar la relación modular entre los archivos del componente: maquetación (<code>.html</code>), estilos (<code>.scss</code>) y lógica (<code>.ts</code>).
+          </p>
+        </div>
+
+        <!-- Goal 5 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-amber-400 hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg mb-4">
+            05
+          </div>
+          <h4 class="text-lg font-bold text-slate-900">Programar Lógica con TypeScript</h4>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Declarar variables fuertemente tipadas y conectar datos y eventos con la vista mediante interpolación <code>{{ '{{ }}' }}</code> y event binding <code>(click)</code>.
+          </p>
+        </div>
+
+        <!-- Goal 6 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-rose-400 hover:shadow-md transition-all">
+          <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-lg mb-4">
+            06
+          </div>
+          <h4 class="text-lg font-bold text-slate-900">Inspeccionar con Device Toolbar</h4>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Utilizar las DevTools del navegador con emulación móvil para depurar resoluciones, safe-areas de iOS y comportamiento táctil.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Nativo vs Híbrido & WebView -->
+  <section id="paradigmas" class="py-12 bg-slate-100/60 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900">⚖️ De Nativo a Multiplataforma</h3>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">
+          ¿Por qué comenzamos con Android Studio y Kotlin en las unidades previas y por qué pasamos a Ionic ahora?
+        </p>
+      </div>
+
+      <!-- Comparison Matrix Table -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-10">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-900 text-white text-xs uppercase tracking-wider">
+              <tr>
+                <th class="py-4 px-6">Criterio</th>
+                <th class="py-4 px-6 bg-slate-800">Desarrollo Nativo (Android Studio)</th>
+                <th class="py-4 px-6 bg-blue-900">Desarrollo Híbrido (Ionic + Angular)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr class="hover:bg-slate-50">
+                <td class="py-4 px-6 font-semibold">Lenguajes de Programación</td>
+                <td class="py-4 px-6">Kotlin / Java + XML o Jetpack Compose</td>
+                <td class="py-4 px-6 font-medium text-blue-700">TypeScript + HTML5 + SCSS</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-4 px-6 font-semibold">Bases de Código (Codebase)</td>
+                <td class="py-4 px-6">Separadas: Una para Android y otra para iOS (Swift)</td>
+                <td class="py-4 px-6 font-medium text-blue-700">Un solo código base para Android, iOS y Web (PWA)</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-4 px-6 font-semibold">Motor de Renderizado</td>
+                <td class="py-4 px-6">Widgets y Canvas nativos del sistema operativo</td>
+                <td class="py-4 px-6 font-medium text-blue-700">WebView nativo optimizado con componentes Web UI</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-4 px-6 font-semibold">Velocidad de Compilación / Pruebas</td>
+                <td class="py-4 px-6">Lenta (Gradle build, emulador pesado en RAM)</td>
+                <td class="py-4 px-6 font-medium text-blue-700">Ultrarrápida (Hot Reload instantáneo en navegador)</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-4 px-6 font-semibold">Acceso a Sensores y Hardware</td>
+                <td class="py-4 px-6">Directo mediante los SDKs oficiales de Google / Apple</td>
+                <td class="py-4 px-6 font-medium text-blue-700">A través de plugins puente (Capacitor Plugins)</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-4 px-6 font-semibold">Curva de Aprendizaje</td>
+                <td class="py-4 px-6">Alta (Específica para cada plataforma)</td>
+                <td class="py-4 px-6 font-medium text-blue-700">Baja a moderada para quienes conocen desarrollo web</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Visual Scheme: WebView & Capacitor Bridge -->
+      <div class="bg-white rounded-2xl p-6 lg:p-8 shadow-sm border border-slate-200">
+        <h4 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+          <i data-lucide="cpu" class="w-5 h-5 text-blue-600"></i> ¿Cómo funciona el concepto de WebView?
+        </h4>
+        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+          En una aplicación Ionic, tu interfaz corre dentro de un <strong>WebView nativo</strong> (un contenedor de navegador sin barra de direcciones). Cuando la app necesita usar hardware (Cámara, GPS, Bluetooth), utiliza <strong>Capacitor</strong> como un puente bidireccional que traduce llamadas JavaScript a código nativo de Java/Kotlin o Swift.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+          <div class="p-5 rounded-xl bg-blue-50 border border-blue-200">
+            <span class="inline-block p-2 rounded-lg bg-blue-600 text-white mb-2">
+              <i data-lucide="globe" class="w-5 h-5"></i>
+            </span>
+            <h5 class="font-bold text-slate-900 text-sm">1. Capa de Aplicación Web</h5>
+            <p class="text-xs text-slate-600 mt-1">Componentes de Ionic (ion-button, ion-card), Angular y TypeScript.</p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-indigo-50 border border-indigo-200 relative">
+            <span class="inline-block p-2 rounded-lg bg-indigo-600 text-white mb-2">
+              <i data-lucide="shuffle" class="w-5 h-5"></i>
+            </span>
+            <h5 class="font-bold text-slate-900 text-sm">2. Puente Capacitor (Bridge)</h5>
+            <p class="text-xs text-slate-600 mt-1">Traduce las promesas de TypeScript a llamadas nativas del sistema operativo.</p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-purple-50 border border-purple-200">
+            <span class="inline-block p-2 rounded-lg bg-purple-600 text-white mb-2">
+              <i data-lucide="hard-drive" class="w-5 h-5"></i>
+            </span>
+            <h5 class="font-bold text-slate-900 text-sm">3. Hardware & Sistema Operativo</h5>
+            <p class="text-xs text-slate-600 mt-1">Sensores, Cámara, Geolocalización, Batería, Sistema de Archivos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Verificación de Entorno & CLI -->
+  <section id="entorno" class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900">💻 Verificación de Entorno de Trabajo</h3>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">
+          Ejecuta estos comandos en tu terminal (PowerShell, CMD o Terminal de VS Code) para comprobar que los equipos de laboratorio están listos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Step 1: Node -->
+        <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-sm border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono text-slate-400">Paso 1</span>
+              <span class="px-2 py-0.5 rounded text-[11px] bg-slate-800 text-emerald-400 font-semibold">Requerido</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Node.js Runtime</h4>
+            <p class="text-xs text-slate-400 mt-1">Entorno de ejecución de JavaScript para compilar Angular.</p>
+            <div class="mt-3 bg-slate-950 p-3 rounded-lg font-mono text-xs text-emerald-400 flex items-center justify-between">
+              <code>node -v</code>
+              <button onclick="copyCommand('node -v')" class="text-slate-400 hover:text-white" title="Copiar">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-3">Versión recomendada: v18.x o v20.x LTS</p>
+        </div>
+
+        <!-- Step 2: npm -->
+        <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-sm border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono text-slate-400">Paso 2</span>
+              <span class="px-2 py-0.5 rounded text-[11px] bg-slate-800 text-emerald-400 font-semibold">Requerido</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Gestor de Paquetes npm</h4>
+            <p class="text-xs text-slate-400 mt-1">Administra paquetes y librerías externas del ecosistema.</p>
+            <div class="mt-3 bg-slate-950 p-3 rounded-lg font-mono text-xs text-emerald-400 flex items-center justify-between">
+              <code>npm -v</code>
+              <button onclick="copyCommand('npm -v')" class="text-slate-400 hover:text-white" title="Copiar">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-3">Versión recomendada: v9.x o superior</p>
+        </div>
+
+        <!-- Step 3: Ionic CLI -->
+        <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-sm border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono text-slate-400">Paso 3</span>
+              <span class="px-2 py-0.5 rounded text-[11px] bg-slate-800 text-blue-400 font-semibold">CLI Ionic</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Ionic Command Line</h4>
+            <p class="text-xs text-slate-400 mt-1">Herramienta para crear, servir y empaquetar proyectos.</p>
+            <div class="mt-3 bg-slate-950 p-3 rounded-lg font-mono text-xs text-blue-400 flex items-center justify-between">
+              <code>ionic --version</code>
+              <button onclick="copyCommand('ionic --version')" class="text-slate-400 hover:text-white" title="Copiar">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-3">Si no existe: <code>npm i -g @ionic/cli</code></p>
+        </div>
+      </div>
+
+      <!-- Recommended VS Code Extensions -->
+      <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+        <h4 class="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <i data-lucide="box" class="w-5 h-5 text-blue-600"></i> Extensiones recomendadas en Visual Studio Code
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-3 bg-white rounded-xl border border-slate-200">
+            <p class="font-bold text-xs text-slate-900">Angular Language Service</p>
+            <p class="text-[11px] text-slate-500 mt-1">Autocompletado de plantillas HTML y enlace con el .ts.</p>
+          </div>
+          <div class="p-3 bg-white rounded-xl border border-slate-200">
+            <p class="font-bold text-xs text-slate-900">Ionic Extension Pack</p>
+            <p class="text-[11px] text-slate-500 mt-1">Snippets rápidos para componentes <code>ion-*</code>.</p>
+          </div>
+          <div class="p-3 bg-white rounded-xl border border-slate-200">
+            <p class="font-bold text-xs text-slate-900">Prettier - Code Formatter</p>
+            <p class="text-[11px] text-slate-500 mt-1">Autoformato consistente de código al guardar.</p>
+          </div>
+          <div class="p-3 bg-white rounded-xl border border-slate-200">
+            <p class="font-bold text-xs text-slate-900">ESLint</p>
+            <p class="text-[11px] text-slate-500 mt-1">Detección estática de errores y malas prácticas de sintaxis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Creación de Proyectos y Anatomía de Archivos -->
+  <section id="anatomia" class="py-12 bg-slate-100/60 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900">📂 Anatomía de un Proyecto Ionic</h3>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">
+          Explora la función de cada archivo dentro del componente y comprende cómo interactúan entre sí.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Interactive File Explorer (Left) -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+          <h4 class="font-bold text-slate-900 text-sm uppercase tracking-wider mb-3 flex items-center gap-2">
+            <i data-lucide="folder-tree" class="w-4 h-4 text-blue-600"></i> Árbol de Archivos (src/app/home/)
+          </h4>
+          <div class="space-y-1 text-sm font-mono">
+            <button onclick="selectFile('ts')" id="btn-ts" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-2 bg-blue-50 text-blue-700 font-semibold border border-blue-200">
+              <i data-lucide="file-code" class="w-4 h-4 text-blue-600"></i> home.page.ts
+              <span class="ml-auto text-xs px-2 py-0.5 rounded bg-blue-200/60 text-blue-800">Lógica</span>
+            </button>
+
+            <button onclick="selectFile('html')" id="btn-html" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-2 text-slate-700 hover:bg-slate-100">
+              <i data-lucide="layout" class="w-4 h-4 text-orange-500"></i> home.page.html
+              <span class="ml-auto text-xs px-2 py-0.5 rounded bg-slate-200 text-slate-700">Vista</span>
+            </button>
+
+            <button onclick="selectFile('scss')" id="btn-scss" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-2 text-slate-700 hover:bg-slate-100">
+              <i data-lucide="palette" class="w-4 h-4 text-pink-500"></i> home.page.scss
+              <span class="ml-auto text-xs px-2 py-0.5 rounded bg-slate-200 text-slate-700">Estilos</span>
+            </button>
+
+            <button onclick="selectFile('routes')" id="btn-routes" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-2 text-slate-700 hover:bg-slate-100">
+              <i data-lucide="route" class="w-4 h-4 text-emerald-500"></i> app.routes.ts
+              <span class="ml-auto text-xs px-2 py-0.5 rounded bg-slate-200 text-slate-700">Rutas</span>
+            </button>
+
+            <button onclick="selectFile('spec')" id="btn-spec" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-2 text-slate-700 hover:bg-slate-100">
+              <i data-lucide="check-square" class="w-4 h-4 text-purple-500"></i> home.page.spec.ts
+              <span class="ml-auto text-xs px-2 py-0.5 rounded bg-slate-200 text-slate-700">Tests</span>
+            </button>
+          </div>
+
+          <div class="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+            <p class="font-bold text-slate-800 mb-1">💡 Regla de oro en Ionic:</p>
+            <p>La lógica NUNCA va en el HTML ni en el SCSS. La lógica de negocio, cálculos y consumo de APIs pertenecen exclusivamente a la clase en <code>.ts</code>.</p>
+          </div>
+        </div>
+
+        <!-- Dynamic File Inspector Detail (Right) -->
+        <div class="lg:col-span-7 bg-slate-900 rounded-2xl p-6 text-white border border-slate-800 shadow-lg">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div>
+              <span id="file-title" class="font-mono font-bold text-blue-400 text-sm">home.page.ts</span>
+              <p id="file-subtitle" class="text-xs text-slate-400">Lógica del componente y manejo de estado</p>
+            </div>
+            <button onclick="copyActiveCode()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 flex items-center gap-1.5 transition-colors">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Código
+            </button>
+          </div>
+
+          <!-- Code Snippet Container -->
+          <pre class="mt-4 p-4 rounded-xl bg-slate-950 font-mono text-xs text-slate-300 overflow-x-auto custom-scrollbar max-h-96"><code id="file-code">// TypeScript Component Logic
+export class HomePage {
+  // Strongly-typed state variables
+  public studentName: string = 'Carlos Mendoza';
+  public counter: number = 0;
+  public isServiceActive: boolean = true;
+
+  // Methods connected via Event Binding (click)
+  public incrementCounter(): void {
+    this.counter++;
+  }
+
+  public toggleServiceStatus(): void {
+    this.isServiceActive = !this.isServiceActive;
+  }
+}</code></pre>
+
+          <div id="file-explanation" class="mt-4 p-3.5 rounded-xl bg-slate-800/80 text-xs text-slate-300 border border-slate-700">
+            <strong>Explicación Didáctica:</strong> Aquí se define el tipado estático con TypeScript. Las propiedades públicas (`studentName`, `counter`) están disponibles automáticamente en la vista sin necesidad de llamadas DOM manuales como <code>document.getElementById</code>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Simulador Móvil Interactivo -->
+  <section id="simulador" class="py-16 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-700 mb-2">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Laboratorio en Vivo
+        </span>
+        <h3 class="text-3xl font-extrabold text-slate-900">📱 Simulador Móvil Interactivo</h3>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">
+          Prueba en tiempo real los conceptos de <strong>Data Binding</strong>, <strong>Event Binding</strong> y el <strong>Reto de Pestañas</strong> exactamente como se comportan en un smartphone real.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Interactive Controls (Left) -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+            <h4 class="font-bold text-slate-900 text-base mb-2">Pruébalo tú mismo:</h4>
+            <p class="text-sm text-slate-600 mb-4">
+              Cambia el nombre en TypeScript para ver cómo la interpolación actualiza la pantalla del teléfono inmediatamente.
+            </p>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre del Estudiante (Variable en .ts):</label>
+                <div class="flex gap-2">
+                  <input type="text" id="sim-input-name" value="Carlos Mendoza" oninput="updateSimStudentName(this.value)" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                  <button onclick="resetSimName()" class="px-3 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 text-xs font-semibold text-slate-700">Reset</button>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <button onclick="setSimTab('home')" id="btn-tab-home" class="px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm">
+                  Vista 1: Home de Clase
+                </button>
+                <button onclick="setSimTab('tab2')" id="btn-tab-tab2" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:bg-slate-100">
+                  Vista 2: Contador (Tab 2)
+                </button>
+                <button onclick="setSimTab('tab3')" id="btn-tab-tab3" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:bg-slate-100">
+                  Vista 3: Perfil (Tab 3)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 space-y-2">
+            <p class="font-bold flex items-center gap-1.5">
+              <i data-lucide="info" class="w-4 h-4 text-blue-600"></i> ¿Qué está ocurriendo internamente?
+            </p>
+            <p>1. <strong>Interpolación:</strong> Al escribir en el input o interactuar con los botones, Angular actualiza la variable de clase y repinta el DOM instantáneamente.</p>
+            <p>2. <strong>Event Binding:</strong> Los toques en "Aumentar" o "Cambiar Estado" disparan métodos TypeScript puros que mutan el modelo.</p>
+          </div>
+        </div>
+
+        <!-- Phone Device Mockup (Right) -->
+        <div class="lg:col-span-6 flex justify-center">
+          <div class="relative w-[340px] h-[670px] bg-slate-900 rounded-[44px] p-4 shadow-2xl border-4 border-slate-700">
+            <!-- Camera / Dynamic Island Notch -->
+            <div class="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-30 flex items-center justify-center">
+              <span class="w-2.5 h-2.5 rounded-full bg-slate-900 mr-2"></span>
+              <span class="w-2 h-2 rounded-full bg-blue-900/60"></span>
+            </div>
+
+            <!-- Screen Viewport -->
+            <div class="w-full h-full bg-slate-100 rounded-[34px] overflow-hidden flex flex-col justify-between pt-8 pb-3 relative">
+              
+              <!-- Ionic Header Bar -->
+              <div class="bg-blue-600 text-white px-4 py-3 shadow-md flex items-center justify-between">
+                <span id="sim-screen-title" class="font-bold text-sm">Ionic & Angular Lab</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-blue-700 text-blue-100">v8.2</span>
+              </div>
+
+              <!-- Scrollable Mobile Content Area -->
+              <div class="flex-1 overflow-y-auto p-3.5 space-y-3 custom-scrollbar text-left text-slate-800">
+                
+                <!-- VIEW 1: HOME -->
+                <div id="sim-view-home" class="space-y-3">
+                  <!-- Student Card -->
+                  <div class="bg-white rounded-xl p-3.5 shadow-sm border border-slate-200">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="text-[10px] font-bold text-blue-600 uppercase">Interpolación</span>
+                      <span class="text-[10px] bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded font-mono">U3</span>
+                    </div>
+                    <h5 class="text-xs font-bold text-slate-900">Estudiante:</h5>
+                    <p id="sim-student-name" class="text-sm font-black text-slate-800">Carlos Mendoza</p>
+                    <p class="text-[11px] text-slate-500">DEV-2024-8842 • Móviles</p>
+                  </div>
+
+                  <!-- Counter Card -->
+                  <div class="bg-white rounded-xl p-3.5 shadow-sm border border-slate-200 text-center">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase">Event Binding (click)</span>
+                    <div class="my-2">
+                      <span id="sim-counter-value" class="text-4xl font-extrabold text-blue-600">0</span>
+                      <div class="mt-1">
+                        <span id="sim-counter-badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Par</span>
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 mt-2">
+                      <button onclick="simIncrement()" class="w-full py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-sm transition-transform active:scale-95">
+                        +1 Aumentar
+                      </button>
+                      <button onclick="simDecrement()" id="sim-btn-dec" disabled class="w-full py-2 rounded-lg bg-amber-500 disabled:opacity-40 text-white font-bold text-xs shadow-sm transition-transform active:scale-95">
+                        -1 Disminuir
+                      </button>
+                    </div>
+
+                    <button onclick="simReset()" class="w-full mt-2 py-1 rounded text-[11px] text-slate-500 hover:text-slate-700 underline">
+                      Reiniciar a 0
+                    </button>
+                  </div>
+
+                  <!-- Toggle State Card -->
+                  <div class="bg-white rounded-xl p-3.5 shadow-sm border border-slate-200 text-center">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase">Conmutador Booleano</span>
+                    <div class="my-2">
+                      <span id="sim-service-badge" class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">
+                        ● Conectado
+                      </span>
+                    </div>
+                    <button onclick="simToggleService()" class="w-full py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs shadow-sm transition-transform active:scale-95">
+                      Alternar Estado
+                    </button>
+                  </div>
+                </div>
+
+                <!-- VIEW 2: TAB 2 (COUNTER CHALLENGE) -->
+                <div id="sim-view-tab2" class="space-y-3 hidden">
+                  <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 text-center">
+                    <span class="text-[10px] font-bold text-indigo-600 uppercase">Reto Pestaña 2</span>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">Contador Interactivo</h5>
+                    <div class="my-4">
+                      <span id="sim-tab2-counter" class="text-5xl font-black text-indigo-600">5</span>
+                    </div>
+                    <div class="space-y-2">
+                      <button onclick="simTab2Inc()" class="w-full py-2.5 rounded-lg bg-emerald-600 text-white font-bold text-xs active:scale-95 shadow-sm">
+                        Aumentar Número
+                      </button>
+                      <button onclick="simTab2Dec()" class="w-full py-2.5 rounded-lg bg-rose-600 text-white font-bold text-xs active:scale-95 shadow-sm">
+                        Disminuir Número
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- VIEW 3: TAB 3 (PROFILE CHALLENGE) -->
+                <div id="sim-view-tab3" class="space-y-3 hidden">
+                  <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 text-center">
+                    <div class="w-16 h-16 rounded-full mx-auto bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xl font-bold shadow-md">
+                      CM
+                    </div>
+                    <h5 id="sim-profile-name" class="text-sm font-bold text-slate-900 mt-2">Carlos Mendoza</h5>
+                    <p class="text-[11px] text-slate-500">Desarrollador Móvil Jr.</p>
+                    
+                    <div class="my-3">
+                      <span id="sim-profile-status" class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">
+                        Estado: Disponible
+                      </span>
+                    </div>
+
+                    <div class="text-left text-[11px] text-slate-600 bg-slate-50 p-2.5 rounded-lg space-y-1 my-3">
+                      <p><strong>Email:</strong> carlos@universidad.edu</p>
+                      <p><strong>Tel:</strong> +52 55 1234 5678</p>
+                    </div>
+
+                    <button onclick="simToggleProfileStatus()" id="sim-btn-profile-toggle" class="w-full py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-sm transition-transform active:scale-95">
+                      Cambiar a Ocupado
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bottom Ionic Tab Bar -->
+              <div class="bg-white border-t border-slate-200 px-4 py-2 flex justify-around items-center text-[10px] text-slate-500">
+                <button onclick="setSimTab('home')" id="nav-btn-home" class="flex flex-col items-center text-blue-600 font-semibold">
+                  <i data-lucide="home" class="w-4 h-4 mb-0.5"></i> Inicio
+                </button>
+                <button onclick="setSimTab('tab2')" id="nav-btn-tab2" class="flex flex-col items-center hover:text-blue-600">
+                  <i data-lucide="calculator" class="w-4 h-4 mb-0.5"></i> Contador
+                </button>
+                <button onclick="setSimTab('tab3')" id="nav-btn-tab3" class="flex flex-col items-center hover:text-blue-600">
+                  <i data-lucide="user" class="w-4 h-4 mb-0.5"></i> Perfil
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Agenda Desglosada Paso a Paso (4 Horas) -->
+  <section id="agenda" class="py-12 bg-slate-100/60 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900">⏱️ Agenda y Desglose Paso a Paso</h3>
+        <p class="mt-2 text-slate-600 text-sm sm:text-base">
+          Estructura de las <strong>4 Horas Presenciales (240 minutos)</strong> con metodología activa orientada a la práctica inmediata.
+        </p>
+      </div>
+
+      <div class="space-y-4 max-w-4xl mx-auto">
+        <!-- Bloque 1 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+            <div class="flex items-center gap-3">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700">BLOQUE 1</span>
+              <h4 class="font-bold text-slate-900 text-base">Transición a Híbrido y Entorno de Trabajo</h4>
+            </div>
+            <span class="text-xs font-semibold text-slate-500 flex items-center gap-1">
+              <i data-lucide="clock" class="w-3.5 h-3.5"></i> 60 min (00:00 - 01:00)
+            </span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-600">
+            <p><strong>00:00 - 00:20 | De Nativo a Multiplataforma:</strong> Explicación de por qué pasamos de Android Studio a Ionic, concepto del WebView y beneficios del código único para Android/iOS.</p>
+            <p><strong>00:20 - 01:00 | Verificación del Entorno:</strong> Comprobación de versiones de Node.js (<code>node -v</code>), npm (<code>npm -v</code>), e instalación de Ionic CLI (<code>ionic --version</code>). Configuración del editor VS Code con Angular Language Service y ESLint.</p>
+          </div>
+          <div class="mt-4 p-3 bg-blue-50/70 rounded-xl text-xs text-blue-800 font-medium">
+            💡 <strong>Consejo Docente:</strong> Pide a los alumnos que muestren en pantalla la salida de <code>ionic --version</code> para asegurar que ningún estudiante empiece con desajustes de CLI.
+          </div>
+        </div>
+
+        <!-- Bloque 2 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+            <div class="flex items-center gap-3">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700">BLOQUE 2</span>
+              <h4 class="font-bold text-slate-900 text-base">Creación del Primer Proyecto y Arquitectura</h4>
+            </div>
+            <span class="text-xs font-semibold text-slate-500 flex items-center gap-1">
+              <i data-lucide="clock" class="w-3.5 h-3.5"></i> 60 min (01:00 - 02:00)
+            </span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-600">
+            <p><strong>01:00 - 01:30 | Creación y Ejecución de la App:</strong> Ejecución de <code>ionic start miPrimeraApp blank --type=angular --no-link</code>. Comparación de plantillas (<code>blank</code>, <code>tabs</code>, <code>sidemenu</code>) y arranque del servidor con <code>ionic serve</code>.</p>
+            <p><strong>01:30 - 02:00 | Anatomía del Proyecto:</strong> Recorrido por el árbol <code>src/app/home/</code> analizando la separación de responsabilidades entre <code>.html</code>, <code>.scss</code>, <code>.ts</code> y <code>app-routing.module.ts</code>.</p>
+          </div>
+        </div>
+
+        <!-- Bloque 3 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+            <div class="flex items-center gap-3">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-700">BLOQUE 3</span>
+              <h4 class="font-bold text-slate-900 text-base">Laboratorio Práctico - TypeScript e Interacción Básica</h4>
+            </div>
+            <span class="text-xs font-semibold text-slate-500 flex items-center gap-1">
+              <i data-lucide="clock" class="w-3.5 h-3.5"></i> 80 min (02:20 - 03:40)
+            </span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-600">
+            <p><strong>02:20 - 02:50 | Fundamentos de TypeScript:</strong> Tipado estático (<code>string</code>, <code>number</code>, <code>boolean</code>), métodos y encapsulamiento en la clase de <code>home.page.ts</code>.</p>
+            <p><strong>02:50 - 03:20 | Construcción de Pantalla Interactiva:</strong> Uso de componentes Ionic (<code>ion-header</code>, <code>ion-title</code>, <code>ion-content</code>, <code>ion-button</code>), interpolación <code>{{ '{{ variable }}' }}</code> y event binding <code>(click)="incrementar()"</code>.</p>
+            <p><strong>03:20 - 03:40 | Pruebas e Inspección en Navegador:</strong> Uso de Chrome DevTools (<code>F12</code>), activación de <strong>Toggle Device Toolbar</strong> (<code>Ctrl + Shift + M</code>) para simular iPhone y Android con marcos táctiles.</p>
+          </div>
+        </div>
+
+        <!-- Bloque 4 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
+            <div class="flex items-center gap-3">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">BLOQUE 4</span>
+              <h4 class="font-bold text-slate-900 text-base">Cierre, Comparativa y Preguntas</h4>
+            </div>
+            <span class="text-xs font-semibold text-slate-500 flex items-center gap-1">
+              <i data-lucide="clock" class="w-3.5 h-3.5"></i> 20 min (03:40 - 04:00)
+            </span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-600">
+            <p><strong>Recapitulación del flujo reactivo:</strong> Variable en TypeScript -> Renderizado en HTML -> Visualización en tiempo real gracias al Hot Reload de Ionic frente a los minutos de compilación de Android Studio.</p>
+            <p><strong>Lanzamiento del Reto Autónomo:</strong> Explicación de las instrucciones y criterios de evaluación para el trabajo independiente de 5 horas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Reto de Trabajo Independiente (5 Horas) -->
+  <section id="reto" class="py-12 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-8 lg:p-12 text-white shadow-2xl">
+        <div class="max-w-3xl">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mb-4">
+            <i data-lucide="award" class="w-3.5 h-3.5"></i> Trabajo Autónomo • 5 Horas Totales
+          </span>
+          <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            Reto Práctico: "Exploración de Plantilla Tabs y Perfil Dinámico"
+          </h3>
+          <p class="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed">
+            Aplica los conocimientos adquiridos creando un proyecto basado en pestañas (<em>tabs</em>) y personalizando cada pantalla con TypeScript reactivo.
+          </p>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Tab 1 Requirement -->
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+            <span class="text-xs font-bold text-indigo-300 uppercase">Pestaña 1</span>
+            <h4 class="font-bold text-white text-base mt-1">Tab 1: Inicio / Bienvenida</h4>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2 list-disc list-inside">
+              <li>Modificar título principal.</li>
+              <li>Mensaje dinámico de bienvenida con nombre del alumno en TypeScript.</li>
+              <li>Datos de carrera y asignatura interpolados.</li>
+            </ul>
+          </div>
+
+          <!-- Tab 2 Requirement -->
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+            <span class="text-xs font-bold text-indigo-300 uppercase">Pestaña 2</span>
+            <h4 class="font-bold text-white text-base mt-1">Tab 2: Contador Interactivo</h4>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2 list-disc list-inside">
+              <li>Botones "Aumentar (+1)" y "Disminuir (-1)".</li>
+              <li>Métodos correspondientes en <code>tab2.page.ts</code>.</li>
+              <li>Validación para no permitir valores negativos.</li>
+            </ul>
+          </div>
+
+          <!-- Tab 3 Requirement -->
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+            <span class="text-xs font-bold text-indigo-300 uppercase">Pestaña 3</span>
+            <h4 class="font-bold text-white text-base mt-1">Tab 3: Perfil Dinámico</h4>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2 list-disc list-inside">
+              <li>Tarjeta de presentación con foto / avatar.</li>
+              <li>Datos de contacto y correo institucional.</li>
+              <li>Botón que cambia estado entre <strong>"Disponible"</strong> y <strong>"Ocupado"</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CLI Command Box -->
+        <div class="mt-8 p-4 bg-black/40 rounded-xl border border-white/10 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+          <div>
+            <span class="text-slate-400"># Comando para iniciar el reto:</span>
+            <p class="text-emerald-400 font-bold mt-1">ionic start appPestanas tabs --type=angular --no-link</p>
+          </div>
+          <button onclick="copyCommand('ionic start appPestanas tabs --type=angular --no-link')" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-sans font-semibold transition-colors flex items-center gap-1.5">
+            <i data-lucide="copy" class="w-4 h-4"></i> Copiar Comando
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Checklist del Estudiante con LocalStorage -->
+  <section id="checklist" class="py-12 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900">✅ Checklist de Progreso del Alumno</h3>
+        <p class="mt-2 text-slate-600 text-sm">
+          Marca cada actividad que completes durante la clase y el trabajo independiente. Tu progreso se guarda automáticamente en tu navegador.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+        <!-- Progress Bar -->
+        <div class="mb-6">
+          <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
+            <span>Progreso Total de la Sesión</span>
+            <span id="checklist-progress-text">0% Completado</span>
+          </div>
+          <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+            <div id="checklist-progress-bar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Task Checkboxes -->
+        <div class="space-y-3 text-sm text-slate-700" id="checklist-items">
+          <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+            <input type="checkbox" onchange="updateProgress()" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 task-check">
+            <span>1. Verificación exitosa de <code>node -v</code>, <code>npm -v</code> e <code>ionic --version</code>.</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+            <input type="checkbox" onchange="updateProgress()" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 task-check">
+            <span>2. Creación del proyecto inicial con <code>ionic start miPrimeraApp blank</code>.</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+            <input type="checkbox" onchange="updateProgress()" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 task-check">
+            <span>3. Ejecución del servidor local con <code>ionic serve</code> y apertura en el navegador.</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+            <input type="checkbox" onchange="updateProgress()" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 task-check">
+            <span>4. Declaración de variables tipadas (<code>string</code>, <code>number</code>, <code>boolean</code>) en TypeScript.</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+            <input type="checkbox" onchange="updateProgress()" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 task-check">
+            <span>5. Enlace de datos visual mediante interpolación <code>{{ '{{ variable }}' }}</code>.</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+            <input type="checkbox" onchange="updateProgress()" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 task-check">
+            <span>6. Vinculación de eventos táctiles mediante <code>(click)="metodo()"</code>.</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+            <input type="checkbox" onchange="updateProgress()" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 task-check">
+            <span>7. Inspección móvil activada en DevTools (<code>F12</code> -> Device Toolbar).</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+            <input type="checkbox" onchange="updateProgress()" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 task-check">
+            <span>8. Implementación del Reto Autónomo de 3 pestañas (Tabs) y cambio de estado de perfil.</span>
+          </label>
+        </div>
+
+        <div class="mt-5 text-right">
+          <button onclick="resetChecklist()" class="text-xs text-slate-400 hover:text-slate-600 underline">
+            Reiniciar Checklist
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 text-xs text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+      <p class="text-slate-300 font-semibold text-sm">
+        Asignatura: Programación de Dispositivos Móviles • Unidad 3: Desarrollo Multiplataforma
+      </p>
+      <p>Material pedagógico interactivo diseñado para el aula y el trabajo independiente.</p>
+      <p class="text-slate-500">Ionic Framework® y Angular® son marcas registradas de sus respectivos creadores.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 border border-slate-700">
+    <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toast-message">Copiado al portapapeles</span>
+  </div>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // File Inspector Data Dictionary
+    const fileData = {
+      ts: {
+        title: 'home.page.ts',
+        subtitle: 'Lógica del componente y tipado TypeScript',
+        code: `import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: 'home.page.html',\n  styleUrls: ['home.page.scss'],\n  standalone: true,\n  imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonButton]\n})\nexport class HomePage {\n  // Strongly-typed state\n  public studentName: string = 'Carlos Mendoza';\n  public counter: number = 0;\n  public isOnline: boolean = true;\n\n  public incrementCounter(): void {\n    this.counter++;\n  }\n\n  public toggleStatus(): void {\n    this.isOnline = !this.isOnline;\n  }\n}`,
+        explanation: 'En este archivo se programa la lógica en TypeScript puro. El tipado estático previene errores en tiempo de compilación. No interactúes con el DOM directamente; Angular se encarga de sincronizar el estado.'
+      },
+      html: {
+        title: 'home.page.html',
+        subtitle: 'Maquetación con componentes de Ionic',
+        code: `<ion-header [translucent]="true">\n  <ion-toolbar color="primary">\n    <ion-title>Laboratorio Ionic 3.1</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class="ion-padding">\n  <!-- Interpolación de variables -->\n  <h2>¡Hola, {{ studentName }}!</h2>\n\n  <!-- Enlace de evento (click) -->\n  <ion-button expand="block" (click)="incrementCounter()">\n    Contador: {{ counter }}\n  </ion-button>\n</ion-content>`,
+        explanation: 'Estructura visual declarativa. Usamos componentes listos para móvil que respetan las guías visuales de Android (Material Design) y de iOS (Cupertino).'
+      },
+      scss: {
+        title: 'home.page.scss',
+        subtitle: 'Estilos CSS específicos del componente',
+        code: `ion-card {\n  border-radius: 16px;\n  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);\n}\n\n.counter-value {\n  font-size: 3rem;\n  font-weight: 800;\n  color: var(--ion-color-primary);\n}`,
+        explanation: 'Estilos encapsulados gracias al Shadow DOM de Angular. Los estilos definidos aquí no afectarán a ninguna otra pantalla de la app.'
+      },
+      routes: {
+        title: 'app.routes.ts',
+        subtitle: 'Enrutamiento y carga perezosa (Lazy Loading)',
+        code: `import { Routes } from '@angular/router';\n\nexport const routes: Routes = [\n  {\n    path: 'home',\n    loadComponent: () => import('./home/home.page').then(m => m.HomePage)\n  },\n  {\n    path: 'tabs',\n    loadChildren: () => import('./tabs/tabs.routes').then(m => m.routes)\n  },\n  {\n    path: '',\n    redirectTo: 'home',\n    pathMatch: 'full'\n  }\n];`,
+        explanation: 'Define qué componente se carga según la URL. Usa standalone lazy-loading para cargar en memoria únicamente la pantalla que el usuario visita.'
+      },
+      spec: {
+        title: 'home.page.spec.ts',
+        subtitle: 'Pruebas unitarias automatizadas',
+        code: `import { ComponentFixture, TestBed } from '@angular/core/testing';\nimport { HomePage } from './home.page';\n\ndescribe('HomePage', () => {\n  let component: HomePage;\n  let fixture: ComponentFixture<HomePage>;\n\n  beforeEach(async () => {\n    await TestBed.configureTestingModule({\n      imports: [HomePage]\n    }).compileComponents();\n\n    fixture = TestBed.createComponent(HomePage);\n    component = fixture.componentInstance;\n    fixture.detectChanges();\n  });\n\n  it('should create the component', () => {\n    expect(component).toBeTruthy();\n  });\n});`,
+        explanation: 'Archivo creado automáticamente por Ionic CLI para escribir pruebas con Jasmine y Karma, garantizando la calidad del software antes del despliegue.'
+      }
+    };
+
+    function selectFile(key) {
+      const data = fileData[key];
+      if (!data) return;
+
+      document.getElementById('file-title').innerText = data.title;
+      document.getElementById('file-subtitle').innerText = data.subtitle;
+      document.getElementById('file-code').innerText = data.code.replace(/\\n/g, '\n');
+      document.getElementById('file-explanation').innerHTML = `<strong>Explicación Didáctica:</strong> ${data.explanation}`;
+
+      // Highlight active button
+      ['ts', 'html', 'scss', 'routes', 'spec'].forEach(k => {
+        const btn = document.getElementById('btn-' + k);
+        if (k === key) {
+          btn.className = 'w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-2 bg-blue-50 text-blue-700 font-semibold border border-blue-200';
+        } else {
+          btn.className = 'w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-2 text-slate-700 hover:bg-slate-100';
+        }
+      });
+    }
+
+    function copyActiveCode() {
+      const code = document.getElementById('file-code').innerText;
+      navigator.clipboard.writeText(code);
+      showToast('Código copiado al portapapeles');
+    }
+
+    function copyCommand(text) {
+      navigator.clipboard.writeText(text);
+      showToast(`Comando copiado: ${text}`);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    // Phone Simulator State
+    let simCounter = 0;
+    let simServiceActive = true;
+    let simTab2Counter = 5;
+    let simProfileAvailable = true;
+
+    function updateSimStudentName(val) {
+      const targetName = val.trim() || 'Estudiante';
+      document.getElementById('sim-student-name').innerText = targetName;
+      document.getElementById('sim-profile-name').innerText = targetName;
+    }
+
+    function resetSimName() {
+      document.getElementById('sim-input-name').value = 'Carlos Mendoza';
+      updateSimStudentName('Carlos Mendoza');
+    }
+
+    function simIncrement() {
+      simCounter++;
+      refreshSimCounterUI();
+    }
+
+    function simDecrement() {
+      if (simCounter > 0) {
+        simCounter--;
+        refreshSimCounterUI();
+      }
+    }
+
+    function simReset() {
+      simCounter = 0;
+      refreshSimCounterUI();
+    }
+
+    function refreshSimCounterUI() {
+      const counterEl = document.getElementById('sim-counter-value');
+      const badgeEl = document.getElementById('sim-counter-badge');
+      const btnDec = document.getElementById('sim-btn-dec');
+
+      counterEl.innerText = simCounter;
+      btnDec.disabled = (simCounter === 0);
+
+      if (simCounter % 2 === 0) {
+        badgeEl.innerText = 'Número Par';
+        badgeEl.className = 'text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800';
+      } else {
+        badgeEl.innerText = 'Número Impar';
+        badgeEl.className = 'text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-100 text-indigo-800';
+      }
+    }
+
+    function simToggleService() {
+      simServiceActive = !simServiceActive;
+      const badge = document.getElementById('sim-service-badge');
+      if (simServiceActive) {
+        badge.innerText = '● Conectado';
+        badge.className = 'text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800';
+      } else {
+        badge.innerText = '○ Pausado';
+        badge.className = 'text-xs font-bold px-3 py-1 rounded-full bg-rose-100 text-rose-800';
+      }
+    }
+
+    function simTab2Inc() {
+      simTab2Counter++;
+      document.getElementById('sim-tab2-counter').innerText = simTab2Counter;
+    }
+
+    function simTab2Dec() {
+      if (simTab2Counter > 0) {
+        simTab2Counter--;
+        document.getElementById('sim-tab2-counter').innerText = simTab2Counter;
+      }
+    }
+
+    function simToggleProfileStatus() {
+      simProfileAvailable = !simProfileAvailable;
+      const statusBadge = document.getElementById('sim-profile-status');
+      const toggleBtn = document.getElementById('sim-btn-profile-toggle');
+
+      if (simProfileAvailable) {
+        statusBadge.innerText = 'Estado: Disponible';
+        statusBadge.className = 'text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800';
+        toggleBtn.innerText = 'Cambiar a Ocupado';
+        toggleBtn.className = 'w-full py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-sm transition-transform active:scale-95';
+      } else {
+        statusBadge.innerText = 'Estado: Ocupado';
+        statusBadge.className = 'text-xs font-bold px-3 py-1 rounded-full bg-rose-100 text-rose-800';
+        toggleBtn.innerText = 'Cambiar a Disponible';
+        toggleBtn.className = 'w-full py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition-transform active:scale-95';
+      }
+    }
+
+    function setSimTab(tab) {
+      document.getElementById('sim-view-home').classList.add('hidden');
+      document.getElementById('sim-view-tab2').classList.add('hidden');
+      document.getElementById('sim-view-tab3').classList.add('hidden');
+
+      // Reset tab nav buttons
+      ['home', 'tab2', 'tab3'].forEach(t => {
+        const btn = document.getElementById('nav-btn-' + t);
+        btn.className = 'flex flex-col items-center hover:text-blue-600 text-slate-500';
+      });
+
+      if (tab === 'home') {
+        document.getElementById('sim-view-home').classList.remove('hidden');
+        document.getElementById('nav-btn-home').className = 'flex flex-col items-center text-blue-600 font-semibold';
+        document.getElementById('sim-screen-title').innerText = 'Ionic & Angular Lab';
+      } else if (tab === 'tab2') {
+        document.getElementById('sim-view-tab2').classList.remove('hidden');
+        document.getElementById('nav-btn-tab2').className = 'flex flex-col items-center text-blue-600 font-semibold';
+        document.getElementById('sim-screen-title').innerText = 'Tab 2: Contador';
+      } else if (tab === 'tab3') {
+        document.getElementById('sim-view-tab3').classList.remove('hidden');
+        document.getElementById('nav-btn-tab3').className = 'flex flex-col items-center text-blue-600 font-semibold';
+        document.getElementById('sim-screen-title').innerText = 'Tab 3: Perfil';
+      }
+    }
+
+    // Checklist with LocalStorage Persistence
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('.task-check');
+      let checkedCount = 0;
+      const state = [];
+
+      checkboxes.forEach((cb, idx) => {
+        if (cb.checked) checkedCount++;
+        state.push(cb.checked);
+      });
+
+      const percent = Math.round((checkedCount / checkboxes.length) * 100);
+      document.getElementById('checklist-progress-text').innerText = `${percent}% Completado (${checkedCount}/${checkboxes.length})`;
+      document.getElementById('checklist-progress-bar').style.width = `${percent}%`;
+
+      localStorage.setItem('ionic_lab_checklist', JSON.stringify(state));
+    }
+
+    function loadChecklist() {
+      const saved = localStorage.getItem('ionic_lab_checklist');
+      if (saved) {
+        try {
+          const state = JSON.parse(saved);
+          const checkboxes = document.querySelectorAll('.task-check');
+          checkboxes.forEach((cb, idx) => {
+            if (state[idx]) cb.checked = true;
+          });
+        } catch(e) {}
+      }
+      updateProgress();
+    }
+
+    function resetChecklist() {
+      localStorage.removeItem('ionic_lab_checklist');
+      document.querySelectorAll('.task-check').forEach(cb => cb.checked = false);
+      updateProgress();
+      showToast('Checklist reiniciado');
+    }
+
+    window.addEventListener('DOMContentLoaded', loadChecklist);
+  </script>
+</body>
+</html>

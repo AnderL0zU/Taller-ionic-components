@@ -1,0 +1,21 @@
+.text-center {
+  text-align: center;
+}
+
+.counter-box {
+  padding: 20px 0;
+}
+
+.value-text {
+  display: block;
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--ion-color-primary);
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}

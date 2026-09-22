@@ -1,0 +1,132 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Ionic & Angular Lab 3.1</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Card 1: Student Information & String Interpolation -->
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <div class="card-top-badge">
+        <ion-chip color="primary">
+          <ion-icon name="hardware-chip-outline"></ion-icon>
+          <ion-label>Angular Standalone</ion-label>
+        </ion-chip>
+      </div>
+      <ion-card-title>Data Binding: Interpolación</ion-card-title>
+      <ion-card-subtitle>{{ unitName }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p class="description-text">
+        Los valores a continuación están definidos como variables en <code>home.page.ts</code>
+        y renderizados en la vista usando la sintaxis de interpolación <code>{{ '{{ variable }}' }}</code>:
+      </p>
+
+      <ion-list lines="inset">
+        <ion-item>
+          <ion-icon name="person-circle-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>
+            <h3>Estudiante</h3>
+            <p><strong>{{ studentName }}</strong></p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h3>Código / Carnet</h3>
+            <p>{{ studentCode }}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h3>Asignatura</h3>
+            <p>{{ subjectTitle }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Card 2: Interactive Counter (Event Binding) -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Event Binding: (click)</ion-card-title>
+      <ion-card-subtitle>Manejo de eventos y reactividad</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content class="text-center">
+      <div class="counter-display">
+        <span class="counter-number">{{ counter }}</span>
+        <ion-badge [color]="counter % 2 === 0 ? 'success' : 'tertiary'">
+          {{ counter % 2 === 0 ? 'Número Par' : 'Número Impar' }}
+        </ion-badge>
+      </div>
+
+      <div class="button-group">
+        <ion-button expand="block" color="success" (click)="incrementCounter()">
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          Aumentar (+1)
+        </ion-button>
+
+        <ion-button
+          expand="block"
+          color="warning"
+          [disabled]="counter === 0"
+          (click)="decrementCounter()"
+        >
+          <ion-icon name="remove-circle-outline" slot="start"></ion-icon>
+          Disminuir (-1)
+        </ion-button>
+
+        <ion-button fill="outline" color="medium" expand="block" (click)="resetCounter()">
+          <ion-icon name="refresh-outline" slot="start"></ion-icon>
+          Reiniciar Contador
+        </ion-button>
+      </div>
+
+      <p class="timestamp-caption">Última acción: {{ lastUpdated }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Card 3: Boolean Toggle & Reactive State -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Estado Dinámico: Toggle</ion-card-title>
+      <ion-card-subtitle>Conmutador de variables booleanas</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content class="text-center">
+      <div class="status-indicator">
+        <ion-chip [color]="isServiceActive ? 'success' : 'danger'">
+          <ion-icon [name]="isServiceActive ? 'checkmark-circle' : 'close-circle'"></ion-icon>
+          <ion-label>{{ isServiceActive ? 'Servicio Activo / Conectado' : 'Servicio Pausado / Desconectado' }}</ion-label>
+        </ion-chip>
+      </div>
+
+      <ion-button expand="block" color="tertiary" (click)="toggleServiceStatus()">
+        Alternar Estado del Servicio
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Card 4: Independent Assignment Link -->
+  <ion-card color="light">
+    <ion-card-header>
+      <ion-card-title>Reto Práctico: Plantilla Tabs</ion-card-title>
+      <ion-card-subtitle>Trabajo Independiente (3.5 Horas)</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        Accede a la solución de referencia de navegación por pestañas con las 3 vistas requeridas:
+        <strong>Inicio</strong>, <strong>Contador</strong> y <strong>Perfil Dinámico</strong>.
+      </p>
+      <ion-button expand="block" color="primary" [routerLink]="['/tabs']">
+        Explorar App de Pestañas (Tabs)
+        <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

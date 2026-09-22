@@ -1,0 +1,51 @@
+ion-card {
+  margin-bottom: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.welcome-card {
+  border-top: 4px solid var(--ion-color-primary);
+}
+
+.card-top-badge {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.description-text {
+  font-size: 0.95rem;
+  color: var(--ion-color-medium);
+  margin-bottom: 12px;
+}
+
+.counter-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.counter-number {
+  font-size: 3.8rem;
+  font-weight: 800;
+  color: var(--ion-color-primary);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.status-indicator {
+  margin-bottom: 16px;
+}
+
+.timestamp-caption {
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  margin-top: 12px;
+}
