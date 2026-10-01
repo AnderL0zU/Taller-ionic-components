@@ -16,6 +16,7 @@ Toda la documentación y ejemplos fueron tomados de la guía oficial de Ionic:
 * **`ion-button`**: Botones interactivas con eventos y activadores (`trigger`).
 * **`ion-header` / `ion-toolbar` / `ion-title`**: Estructura de encabezados de pantalla.
 * **`ion-content`**: Contenedor principal de la vista.
+* **`ion-icons`**: Se importaron nuevos iconos desde ionic.io
 
 * **`ion-checklist`**
 * **`ion-card`**
@@ -23,4 +24,6 @@ Toda la documentación y ejemplos fueron tomados de la guía oficial de Ionic:
 * **`ion-alert`**
 * **`ion-thumbnail`**
 * **`ion-toggle`**
+* **`ion-badge`**
+
 
