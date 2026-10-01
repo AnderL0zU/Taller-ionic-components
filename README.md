@@ -20,7 +20,7 @@ Toda la documentación y ejemplos fueron tomados de la guía oficial de Ionic:
 * **`ion-checklist`**
 * **`ion-card`**
 * **`ion-grid`**
-* * **`ion-alert`**
+* **`ion-alert`**
 * **`ion-thumbnail`**
 * **`ion-toggle`**
 
