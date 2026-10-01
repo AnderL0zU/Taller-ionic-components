@@ -10,7 +10,7 @@ Toda la documentación y ejemplos fueron tomados de la guía oficial de Ionic:
 
 ---
 
-## 🛠️ Componentes Probados e Implementados
+## Componentes Probados e Implementados
 
 * **`ion-action-sheet`**: Menú desplegable de opciones y acciones (`Delete`, `Share`, `Cancel`).
 * **`ion-button`**: Botones interactivas con eventos y activadores (`trigger`).
