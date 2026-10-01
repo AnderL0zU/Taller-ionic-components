@@ -3,11 +3,12 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   margin: 12px 4px 24px 4px;
   overflow: hidden;
+  width: 450px;
 }
 
 .profile-header-banner {
   height: 95px;
-  background: linear-gradient(135deg, #3880ff 0%, #1e5ad6 100%);
+  background: linear-gradient(135deg, #152134 0%, #530fd3 100%);
   position: relative;
 }
 
@@ -86,6 +87,12 @@ ion-list {
       color: var(--ion-text-color, #222);
       font-weight: 500;
     }
+  }
+}
+.other-users-container {
+  h2 {
+    font-weight: 600;
+    margin-left: 8px;
   }
 }
 

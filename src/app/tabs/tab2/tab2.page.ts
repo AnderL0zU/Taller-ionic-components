@@ -13,9 +13,11 @@ import {
   IonButton,
   IonIcon,
   IonBadge,
+  IonActionSheet
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { addOutline, removeOutline, refreshOutline } from 'ionicons/icons';
+import { IonCol, IonGrid, IonRow } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -36,10 +38,36 @@ import { addOutline, removeOutline, refreshOutline } from 'ionicons/icons';
     IonButton,
     IonIcon,
     IonBadge,
+    IonActionSheet
   ],
 })
 export class Tab2Page {
+  public studentFullName: string = 'Anderson Lozano';
   public counterValue: number = 5;
+
+  //!ACTION SHEET
+  public actionSheetButtons = [
+    {
+      text: 'Delete',
+      role: 'destructive',
+      data: {
+        action: 'delete',
+      },
+    },
+    {
+      text: 'Share',
+      data: {
+        action: 'share',
+      },
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
 
   constructor() {
     addIcons({ addOutline, removeOutline, refreshOutline });
@@ -59,3 +87,9 @@ export class Tab2Page {
     this.counterValue = 0;
   }
 }
+
+
+
+
+  
+  

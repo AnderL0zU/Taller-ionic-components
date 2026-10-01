@@ -11,28 +11,132 @@
       <ion-card-subtitle>{{ academicDegree }}</ion-card-subtitle>
     </ion-card-header>
 
+
     <ion-card-content>
-      <p>{{ welcomeMessage }}. Esta pantalla demuestra cómo enlazar propiedades declaradas en TypeScript con la vista.</p>
+      <!--Interpolacion: -->
+      <p>{{ welcomeMessage }} {{studentFullName}}, esta pantalla demuestra cómo enlazar propiedades declaradas en TypeScript con la vista.</p>
 
-      <ion-list lines="none" class="info-list">
-        <ion-item>
-          <ion-icon name="book-outline" slot="start" color="tertiary"></ion-icon>
-          <ion-label>Unidad 3: Desarrollo Multiplataforma</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="time-outline" slot="start" color="warning"></ion-icon>
-          <ion-label>3.5 Horas de Trabajo Autónomo</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="checkmark-done-circle-outline" slot="start" color="success"></ion-icon>
-          <ion-label>Proyecto Configurado con Éxito</ion-label>
-        </ion-item>
-      </ion-list>
 
-      <ion-button fill="outline" expand="block" [routerLink]="['/home']">
-        <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
-        Volver a Pantalla Principal
-      </ion-button>
+
+    <ion-list lines="none" class="info-list">
+      <ion-item>
+        <ion-icon name="book-outline" slot="start" color="tertiary"></ion-icon>
+        <ion-label class="ion-text-wrap">Unidad 3: Desarrollo Multiplataforma, tecnologías usadas: NPM, Angular, Ionic,
+          HTML, SCSS, TS</ion-label>
+      </ion-item>
+    
+      <ion-item>
+        <ion-icon name="time-outline" slot="start" color="warning"></ion-icon>
+        <ion-label class="ion-text-wrap">3.5 Horas de Trabajo Autónomo</ion-label>
+      </ion-item>
+    
+      <!-- Encabezado principal del último ítem -->
+      <ion-item>
+        <ion-icon name="checkmark-done-circle-outline" slot="start" color="success"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h2>Ventanas interactivas y navegación con TAB</h2>
+        </ion-label>
+      </ion-item>
+    
+      <!-- Sublista independiente indentada -->
+      <div class="sub-list-container">
+        <ion-item>
+          <ion-icon name="caret-down-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>Tab 1: Inicio y bienvenida</ion-label>
+        </ion-item>
+    
+        <ion-item>
+          <ion-icon name="chevron-up-outline" slot="start" color="tertiary"></ion-icon>
+          <ion-label>Tab 2: Contador</ion-label>
+        </ion-item>
+    
+        <ion-item>
+          <ion-icon name="people-outline" slot="start" color="danger"></ion-icon>
+          <ion-label>Tab 3: Perfil</ion-label>
+        </ion-item>
+      </div>
+    </ion-list>
     </ion-card-content>
   </ion-card>
+
+<ion-grid>
+  <ion-row>
+    
+    <ion-col size="12" size-md="4">
+      <ion-card>
+        <ion-card-header>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <ion-icon name="caret-down-outline" color="primary" style="font-size: 28px;"></ion-icon>
+            <div>
+              <ion-card-title>Inicio</ion-card-title>
+              <ion-card-subtitle>Pagina del home</ion-card-subtitle>
+            </div>
+          </div>
+        </ion-card-header>
+        <ion-card-content>
+          <h1>1</h1>
+          <p>Prueba pagina inicio agregando mas cards con grid y ion-items a la lista.</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+   
+    <ion-col size="12" size-md="4">
+      <ion-card>
+        <ion-card-header>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <ion-icon name="chevron-up-outline" color="tertiary" style="font-size: 28px;"></ion-icon>
+            <div>
+              <ion-card-title>Contador</ion-card-title>
+              <ion-card-subtitle>Sumatoria o resta +-1</ion-card-subtitle>
+            </div>
+          </div>
+        </ion-card-header>
+        <ion-card-content>
+          <h1>2</h1>
+          <p>Se prueba el temporizador con los requisitos, y se agrega interpolacion.</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    
+    <ion-col size="12" size-md="4">
+      <ion-card>
+        <ion-card-header>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <ion-icon name="people-outline" color="danger" style="font-size: 28px;"></ion-icon>
+            <div>
+              <ion-card-title>Perfiles</ion-card-title>
+              <ion-card-subtitle>Seccion de perfiles de miembros del equipo</ion-card-subtitle>
+            </div>
+          </div>
+        </ion-card-header>
+        <ion-card-content>
+          <h1>3</h1>
+          <p>Informacion sobre integrantes del equipo y su estado de actividad</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<div class="checkbox-centrado ion-margin-vertical">
+  <ion-checkbox labelPlacement="end">
+    Acepto términos y condiciones
+  </ion-checkbox>
+</div>
+
+<div class="ion-text-center ion-margin-top">
+  <ion-button id="present-alert">Continuar</ion-button>
+</div>
+
+<ion-alert
+  trigger="present-alert"
+  header="Ups! Esto es todo por ahora"
+  message="Por Ahora tenemos otras tabs para navegar "
+  [buttons]="alertButtons"
+></ion-alert>
+
+
+
 </ion-content>

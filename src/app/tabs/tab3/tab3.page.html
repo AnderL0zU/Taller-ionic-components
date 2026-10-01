@@ -5,63 +5,254 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-card class="profile-card">
-    <div class="profile-header-banner"></div>
-    <div class="avatar-wrapper">
-      <ion-avatar class="student-avatar">
-        <img [src]="avatarImageUrl" alt="Avatar de usuario" />
-      </ion-avatar>
-    </div>
+  <ion-grid>
+    <ion-row>
+      <!-- TARJETA 1 -->
+      <ion-col size="12" size-md="6">
+        <ion-card class="profile-card">
+          <div class="profile-header-banner"></div>
+          <div class="avatar-wrapper">
+            <ion-avatar class="student-avatar">
+              <img [src]="avatarImageUrl" alt="Avatar de usuario" />
+            </ion-avatar>
+          </div>
 
-    <ion-card-header class="text-center">
-      <ion-card-title>{{ fullName }}</ion-card-title>
-      <ion-card-subtitle>{{ roleTitle }}</ion-card-subtitle>
+          <ion-card-header class="text-center">
+            <ion-card-title>{{ fullName }}</ion-card-title>
+            <ion-card-subtitle>{{ roleTitle }}</ion-card-subtitle>
 
-      <div class="status-badge-container">
-        <ion-chip [color]="isAvailable ? 'success' : 'danger'">
-          <ion-icon [name]="isAvailable ? 'checkmark-circle' : 'pause-circle'"></ion-icon>
-          <ion-label>Estado: {{ isAvailable ? 'Disponible' : 'Ocupado' }}</ion-label>
-        </ion-chip>
-      </div>
-    </ion-card-header>
+            <div class="status-badge-container">
+              <ion-chip [color]="isAvailable ? 'success' : 'secondary'">
+                <ion-icon [name]="isAvailable ? 'checkmark-circle' : 'pause-circle'"></ion-icon>
+                <ion-label>Estado: {{ isAvailable ? 'Disponible' : 'Ocupado' }}</ion-label>
+              </ion-chip>
+            </div>
+          </ion-card-header>
 
-    <ion-card-content>
-      <ion-list lines="inset">
-        <ion-item>
-          <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
-          <ion-label>
-            <h3>Correo Institucional</h3>
-            <p>{{ emailAddress }}</p>
-          </ion-label>
-        </ion-item>
+          <ion-card-content>
+            <ion-list lines="inset">
+              <ion-item>
+                <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+                <ion-label>
+                  <h3>Correo Institucional</h3>
+                  <p>{{ emailAddress }}</p>
+                </ion-label>
+              </ion-item>
 
-        <ion-item>
-          <ion-icon name="call-outline" slot="start" color="secondary"></ion-icon>
-          <ion-label>
-            <h3>Teléfono</h3>
-            <p>{{ phoneNumber }}</p>
-          </ion-label>
-        </ion-item>
+              <ion-item>
+                <ion-icon name="call-outline" slot="start" color="secondary"></ion-icon>
+                <ion-label>
+                  <h3>Teléfono</h3>
+                  <p>{{ phoneNumber }}</p>
+                </ion-label>
+              </ion-item>
 
-        <ion-item>
-          <ion-icon name="location-outline" slot="start" color="tertiary"></ion-icon>
-          <ion-label>
-            <h3>Ubicación</h3>
-            <p>{{ locationCity }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
+              <ion-item>
+                <ion-icon name="logo-github" slot="start" color="medium"></ion-icon>
+                <ion-label>
+                  <h3>Github</h3>
+                  <p>{{ github }}</p>
+                </ion-label>
+              </ion-item>
 
-      <div class="toggle-container">
-        <ion-button
-          expand="block"
-          [color]="isAvailable ? 'danger' : 'success'"
-          (click)="toggleAvailability()"
-        >
-          <ion-icon name="sync-outline" slot="start"></ion-icon>
-          Cambiar a {{ isAvailable ? 'Ocupado' : 'Disponible' }}
-        </ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
+              <ion-item>
+                <ion-icon name="newspaper-outline" slot="start" color="warning"></ion-icon>
+                <ion-label>
+                  <h3>Portfolio</h3>
+                  <p>{{ portfolio }}</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="location-outline" slot="start" color="success"></ion-icon>
+                <ion-label>
+                  <h3>Ubicación</h3>
+                  <p>{{ locationCity }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+
+            <div class="toggle-container">
+              <ion-button
+                expand="block"
+                [color]="isAvailable ? 'secondary' : 'success'"
+                (click)="toggleAvailability()"
+              >
+                <ion-icon name="sync-outline" slot="start"></ion-icon>
+                Cambiar a {{ isAvailable ? 'Ocupado' : 'Disponible' }}
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- TARJETA 2 -->
+      <ion-col size="12" size-md="6">
+        <ion-card class="profile-card">
+          <div class="profile-header-banner"></div>
+          <div class="avatar-wrapper">
+            <ion-avatar class="student-avatar">
+              <img [src]="avatarImageUrl2 " alt="Avatar de usuario 2" />
+            </ion-avatar>
+          </div>
+
+          <ion-card-header class="text-center">
+            <ion-card-title>{{ fullName2 }}</ion-card-title>
+            <ion-card-subtitle>{{ roleTitle2 }}</ion-card-subtitle>
+
+            <div class="status-badge-container">
+              <ion-chip [color]="isAvailable2 ? 'success' : 'secondary'">
+                <ion-icon [name]="isAvailable2 ? 'checkmark-circle' : 'pause-circle'"></ion-icon>
+                <ion-label>Estado: {{ isAvailable2 ? 'Disponible' : 'Ocupado' }}</ion-label>
+              </ion-chip>
+            </div>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-list lines="inset">
+              <ion-item>
+                <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+                <ion-label>
+                  <h3>Correo Institucional</h3>
+                  <p>{{ emailAddress2 }}</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="call-outline" slot="start" color="secondary"></ion-icon>
+                <ion-label>
+                  <h3>Teléfono</h3>
+                  <p>{{ phoneNumber2 }}</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="logo-github" slot="start" color="medium"></ion-icon>
+                <ion-label>
+                  <h3>Github</h3>
+                  <p>{{ github2 }}</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="newspaper-outline" slot="start" color="warning"></ion-icon>
+                <ion-label>
+                  <h3>Portfolio</h3>
+                  <p>{{ portfolio2 }}</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="location-outline" slot="start" color="success"></ion-icon>
+                <ion-label>
+                  <h3>Ubicación</h3>
+                  <p>{{ locationCity2 }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+
+            <div class="toggle-container">
+              <ion-button
+                expand="block"
+                [color]="isAvailable2 ? 'secondary' : 'success'"
+                (click)="toggleAvailability2()"
+              >
+                <ion-icon name="sync-outline" slot="start"></ion-icon>
+                Cambiar a {{ isAvailable2 ? 'Ocupado' : 'Disponible' }}
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <ion-card>
+  <ion-card-header>
+    <ion-card-title>Otros usuarios</ion-card-title>
+    <ion-card-subtitle>Directorio del equipo</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <!-- Usuario 1 -->
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="user-grid-item">
+            <ion-thumbnail slot="start">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop" alt="Avatar Ana Pérez" />
+            </ion-thumbnail>
+            <ion-label>
+              <h2>Ana Pérez</h2>
+              <p>Desarrolladora Frontend</p>
+            </ion-label>
+            <ion-badge slot="end" color="success">Activo</ion-badge>
+          </ion-item>
+        </ion-col>
+
+        <!-- Usuario 2 -->
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="user-grid-item">
+            <ion-thumbnail slot="start">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop" alt="Avatar Carlos" />
+            </ion-thumbnail>
+            <ion-label>
+              <h2>Carlos Gómez</h2>
+              <p>Diseñador UX</p>
+            </ion-label>
+            <ion-badge slot="end" color="danger">Time off</ion-badge>
+          </ion-item>
+        </ion-col>
+
+        <!-- Usuario 3 -->
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="user-grid-item">
+            <ion-thumbnail slot="start">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop" alt="Avatar Elena" />
+            </ion-thumbnail>
+            <ion-label>
+              <h2>Elena Torres</h2>
+              <p>PM / Leader</p>
+            </ion-label>
+            <ion-badge slot="end" color="medium">Inactivo</ion-badge>
+          </ion-item>
+        </ion-col>
+
+        <!-- Usuario 4 -->
+        <ion-col size="12" size-md="6">
+          <ion-item lines="none" class="user-grid-item">
+            <ion-thumbnail slot="start">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop" alt="Avatar Luis" />
+            </ion-thumbnail>
+            <ion-label>
+              <h2>Luis Morales</h2>
+              <p>Backend Dev</p>
+            </ion-label>
+            <ion-badge slot="end" color="success">Activo</ion-badge>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="6" size-lg="4">
+        <ion-list>
+          <ion-item>
+            <ion-toggle>Recibir notificaciones de cambios de estado</ion-toggle>
+          </ion-item>
+          <ion-item>
+            <ion-toggle>Recibir Emails</ion-toggle>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
+

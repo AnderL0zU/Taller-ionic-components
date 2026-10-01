@@ -1,7 +1,23 @@
 import { Component } from '@angular/core';
-import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
+// Importa TODO desde @ionic/angular/standalone
+import { 
+  IonTabs, 
+  IonTabBar, 
+  IonTabButton, 
+  IonIcon, 
+  IonLabel 
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { homeOutline, calculatorOutline, personOutline } from 'ionicons/icons';
+import { 
+  homeOutline, 
+  calculatorOutline, 
+  personOutline, 
+  caretDownOutline, 
+  chevronUpOutline, 
+  peopleOutline, 
+  logoGithub, 
+  newspaperOutline 
+} from 'ionicons/icons';
 
 /**
  * TabsPage Component
@@ -12,6 +28,7 @@ import { homeOutline, calculatorOutline, personOutline } from 'ionicons/icons';
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
   standalone: true,
+  // Removidos IonGrid, IonRow e IonCol si no se usan en tabs.page.html
   imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel],
 })
 export class TabsPage {
@@ -20,6 +37,11 @@ export class TabsPage {
       homeOutline,
       calculatorOutline,
       personOutline,
+      caretDownOutline,
+      chevronUpOutline,
+      peopleOutline,
+      logoGithub,
+      newspaperOutline
     });
   }
 }

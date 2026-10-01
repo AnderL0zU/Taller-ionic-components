@@ -16,9 +16,15 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonAlert,
+  IonCheckbox
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, bookOutline, timeOutline, checkmarkDoneCircleOutline } from 'ionicons/icons';
+
 
 @Component({
   selector: 'app-tab1',
@@ -42,13 +48,23 @@ import { arrowBackOutline, bookOutline, timeOutline, checkmarkDoneCircleOutline 
     IonItem,
     IonLabel,
     IonList,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonAlert,
+    IonCheckbox
   ],
 })
+
+
 export class Tab1Page {
-  // Dynamic student greeting state
-  public studentFullName: string = 'Carlos Mendoza';
-  public academicDegree: string = 'Ingeniería en Sistemas Computacionales';
-  public welcomeMessage: string = 'Bienvenido a la sesión de Ionic y Angular';
+  public studentFullName: string = 'Anderson Lozano';
+  public academicDegree: string = 'Ingeniería de Software';
+  
+  
+  public welcomeMessage: string = `Bienvenido a la sesión de Ionic y Angular, esperamos que disfrutes tu viaje.`;
+  public alertButtons = ['OK'];
+
 
   constructor() {
     addIcons({ arrowBackOutline, bookOutline, timeOutline, checkmarkDoneCircleOutline });
